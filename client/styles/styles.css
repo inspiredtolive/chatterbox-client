@@ -1,5 +1,5 @@
 body {
-    background: #eee;
+    background: #000;
     text-align: center;
     padding: 0 25px;
     font-family: arial, sans-serif;
@@ -9,9 +9,9 @@ body {
     width: 500px;
     margin: auto;
     text-align: left;
-    background: white;
+    background: grey;
     padding: 50px 60px;
-    border: solid #ddd;
+    border: solid #000;
     border-width: 0 1px 1px 1px;
 }
 
@@ -20,6 +20,7 @@ body {
     font-size: 35px;
     margin-bottom: 5px;
     padding: 5px;
+    text-align: center;
 }
 
 #main h1 span {
@@ -62,7 +63,8 @@ form input[type=text] {
 .chat {
     padding: 5px;
     margin-bottom: 5px;
-    background-color: #eee;
+    color: white;
+    background-color: #555;
 }
 
 .chat .username {
@@ -85,4 +87,10 @@ form input[type=text] {
     color: #fff;
     background-color: #0090da;
 }
-
+.username:hover {
+    color:gold;
+}
+.self {
+    color: #fff;
+    background-color: #00da90;
+}

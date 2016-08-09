@@ -15,6 +15,16 @@ var app = {
   init: function () {
     console.log('initializing');
     $('.submit').on('submit', app.handleSubmit);
+    $('.add').on('submit', (e) => {
+      e.preventDefault();      
+      var roomName = $('#room').val();
+      var safeRoom = _.escape(roomName);
+      $('#room').val('');
+      if (!newestDate.hasOwnProperty(safeRoom) && safeRoom.trim() ) {
+        newestDate[safeRoom] = 0;
+        app.addRoom(safeRoom);
+      }
+    });
     $('#roomSelect').on('change', () => {
       _.each(newestDate, (item, key) => {
         newestDate[key] = 0;
@@ -48,8 +58,7 @@ var app = {
           //saferRoom = _.escape(saferRoom);
           if (saferRoom && !newestDate.hasOwnProperty(saferRoom)) {
             console.log(saferRoom, msgObj.roomname);
-            $('#roomSelect').append('<option value="' + _.escape(saferRoom) + '">' + _.escape(saferRoom) + '</option>');
-
+            app.addRoom(saferRoom);
             newestDate[saferRoom] = 0;
           }
           return saferRoom === currentRoom;
@@ -97,7 +106,8 @@ var app = {
     }
   },
   addRoom: function (roomName) {
-    $('#roomSelect').append('<' + roomName + '></' + roomName + '>');
+    $('#roomSelect').append('<option value="' + _.escape(roomName) + '">' + _.escape(roomName) + '</option>');
+
   },
   addFriend: function () {
     var username = $(this).text();

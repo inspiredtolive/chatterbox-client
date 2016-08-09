@@ -69,9 +69,7 @@ form input[type=text] {
     font-weight: 800;
 }
 
-.chat:hover {
-    background-color: #ddd;
-}
+
 
 .spinner {
     float: right;

@@ -15,7 +15,16 @@
   <body>
     <div id="main">
       <h1>chatterbox</h1>
+      <select id="roomSelect" name="roomnames">
+        <option value="lobby">Lobby</option>
+      </select>
       <!-- Your HTML goes here! -->
+      <div id="send">
+        <form  class="submit" method="post">
+          <input id="message" type="text">
+          <input type="submit">
+        </form>
+      </div>
     </div>
     <div id="chats"></div>
   </body>

@@ -11,7 +11,7 @@ var newestDate = {
 var users = {};
 var friends = [];
 var app = {
-  url: 'https://api.parse.com/1/classes/messages',
+  server: 'https://api.parse.com/1/classes/messages',
   init: function () {
     console.log('initializing');
     $('.submit').on('submit', app.handleSubmit);
@@ -27,15 +27,15 @@ var app = {
   },
   send: function (data) {
     $.ajax({
-      url: this.url,
+      url: this.server,
       type: 'POST',
       dataType: 'json',
       data: JSON.stringify(data)
     });
   },
-  fetch: function (data) {
+  fetch: function () {
     $.ajax({
-      url: this.url,
+      url: this.server,
       datatype: 'json',
       success: function (obj) {
         var currentRoom = $('#roomSelect').val();
@@ -44,11 +44,15 @@ var app = {
         // add new rooms to roomSelect
         // adds most recent date to newestDate Obj
         var roomMessages = obj.results.filter((msgObj) => {
-          if (msgObj.roomname && !newestDate.hasOwnProperty(msgObj.roomname)) {
-            $('#roomSelect').append('<option value="' + msgObj.roomname + '">' + msgObj.roomname + '</option>');
-            newestDate[msgObj.roomname] = 0;
+          var saferRoom = _.escape(msgObj.roomname);
+          //saferRoom = _.escape(saferRoom);
+          if (saferRoom && !newestDate.hasOwnProperty(saferRoom)) {
+            console.log(saferRoom, msgObj.roomname);
+            $('#roomSelect').append('<option value="' + _.escape(saferRoom) + '">' + _.escape(saferRoom) + '</option>');
+
+            newestDate[saferRoom] = 0;
           }
-          return msgObj.roomname === currentRoom;
+          return saferRoom === currentRoom;
         });
 
         // add messages 
